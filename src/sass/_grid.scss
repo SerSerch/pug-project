@@ -1,0 +1,84 @@
+@import "vars";
+
+@mixin col($column) {
+  flex: 0 0 (100% / 12) * $column;
+  max-width: (100% / 12) * $column;
+}
+
+._container {
+  width: 100%;
+  margin: 0 auto;
+}
+
+._row {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+._col {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  padding: 15px;
+  box-sizing: border-box;
+
+  @for $i from 1 to 5 {
+    &-#{$i*3} {
+      @extend ._col;
+      @include col($i*3);
+    }
+  }
+
+  @for $i from 1 to 13 {
+    &-sm-#{$i},
+    &-md-#{$i},
+    &-lg-#{$i},
+    &-xl-#{$i} {
+      @extend ._col;
+    }
+  }
+}
+
+@media (min-width: $sm) {
+  @for $i from 1 to 13 {
+    ._col-sm-#{$i} {
+      @include col($i);
+    }
+  }
+}
+
+@media (min-width: $md) {
+  @for $i from 1 to 13 {
+    ._col-md-#{$i} {
+      @include col($i);
+    }
+  }
+}
+
+@media (min-width: $lg) {
+  @for $i from 1 to 13 {
+    ._col-lg-#{$i} {
+      @include col($i);
+    }
+  }
+}
+
+@media (min-width: $xl) {
+  ._container {
+    max-width: 1170px;
+  }
+
+  @for $i from 1 to 13 {
+    ._col-xl-#{$i} {
+      @include col($i);
+    }
+  }
+}
+
+._ptb-n {
+  padding: 0 15px;
+}
+
+._p-n {
+  padding: 0;
+}
